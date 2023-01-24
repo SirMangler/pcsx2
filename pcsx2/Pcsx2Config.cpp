@@ -1322,6 +1322,7 @@ Pcsx2Config::Pcsx2Config()
 	}
 
 	GzipIsoIndexTemplate = "$(f).pindex.tmp";
+	PINESlot = 28011;
 }
 
 void Pcsx2Config::LoadSave(SettingsWrapper& wrap)
@@ -1379,6 +1380,7 @@ void Pcsx2Config::LoadSave(SettingsWrapper& wrap)
 #endif
 
 	SettingsWrapEntry(GzipIsoIndexTemplate);
+	SettingsWrapEntry(PINESlot);
 
 	// For now, this in the derived config for backwards ini compatibility.
 	SettingsWrapEntryEx(CurrentBlockdump, "BlockDumpSaveDirectory");
@@ -1454,7 +1456,8 @@ bool Pcsx2Config::operator==(const Pcsx2Config& right) const
 		OpEqu(Framerate) &&
 		OpEqu(Trace) &&
 		OpEqu(BaseFilenames) &&
-		OpEqu(GzipIsoIndexTemplate);
+		OpEqu(GzipIsoIndexTemplate) &&
+		OpEqu(PINESlot);
 	for (u32 i = 0; i < sizeof(Mcd) / sizeof(Mcd[0]); i++)
 	{
 		equal &= OpEqu(Mcd[i].Enabled);
