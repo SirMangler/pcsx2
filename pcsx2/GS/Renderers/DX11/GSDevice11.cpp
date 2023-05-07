@@ -610,7 +610,7 @@ bool GSDevice11::CreateSwapChain()
 	u32 surface_height = m_window_info.surface_height;
 #endif
 
-	m_using_flip_model_swap_chain = !EmuConfig.GS.UseBlitSwapChain || m_is_exclusive_fullscreen;
+	m_using_flip_model_swap_chain = !GSConfig.UseBlitSwapChain || m_is_exclusive_fullscreen;
 
 	DXGI_SWAP_CHAIN_DESC1 swap_chain_desc = {};
 	swap_chain_desc.Width = surface_width;
