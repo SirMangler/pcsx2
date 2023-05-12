@@ -364,6 +364,9 @@ void VMManager::ApplyGameFixes()
 {
 	s_active_game_fixes = 0;
 
+	if (s_game_crc == 0)
+		return;
+
 	const GameDatabaseSchema::GameEntry* game = GameDatabase::findGame(s_game_serial);
 	if (!game)
 		return;
@@ -788,7 +791,9 @@ void VMManager::UpdateRunningGame(bool resetting, bool game_starting, bool swapp
 
 		std::string memcardFilters;
 
-		if (const GameDatabaseSchema::GameEntry* game = GameDatabase::findGame(s_game_serial))
+		if (s_game_crc == 0)
+			s_game_name = "Booting PS2 BIOS...";
+		else if (const GameDatabaseSchema::GameEntry* game = GameDatabase::findGame(s_game_serial))
 		{
 			if (!s_elf_override.empty())
 				s_game_name = Path::GetFileTitle(FileSystem::GetDisplayNameFromPath(s_elf_override));
@@ -796,11 +801,6 @@ void VMManager::UpdateRunningGame(bool resetting, bool game_starting, bool swapp
 				s_game_name = game->name;
 
 			memcardFilters = game->memcardFiltersAsString();
-		}
-		else
-		{
-			if (s_game_serial.empty() && s_game_crc == 0)
-				s_game_name = "Booting PS2 BIOS...";
 		}
 
 		sioSetGameSerial(memcardFilters.empty() ? s_game_serial : memcardFilters);
