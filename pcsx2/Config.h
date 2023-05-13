@@ -713,7 +713,7 @@ struct Pcsx2Config
 		bool SynchronousMTGS = false;
 		bool FrameLimitEnable = true;
 
-		VsyncMode VsyncEnable = VsyncMode::Off;
+		VsyncMode VsyncEnable = VsyncMode::On;
 
 		float LimitScalar = 1.0f;
 		float FramerateNTSC = DEFAULT_FRAME_RATE_NTSC;
@@ -727,10 +727,10 @@ struct Pcsx2Config
 		float StretchY = 100.0f;
 		int Crop[4] = {};
 
-		float OsdScale = 100.0;
+		float OsdScale = 200.0;
 
 		GSRendererType Renderer = GSRendererType::Auto;
-		float UpscaleMultiplier = 1.0f;
+		float UpscaleMultiplier = 3.0f;
 
 		HWMipmapLevel HWMipmap = HWMipmapLevel::Automatic;
 		AccBlendLevel AccurateBlendingUnit = AccBlendLevel::Basic;
@@ -946,20 +946,20 @@ struct Pcsx2Config
 			}
 		};
 
-		bool EthEnable{false};
-		NetApi EthApi{NetApi::Unset};
-		std::string EthDevice;
+		bool EthEnable{true};
+		NetApi EthApi{NetApi::Sockets};
+		std::string EthDevice{"Auto"};
 		bool EthLogDNS{false};
 
 		bool InterceptDHCP{false};
 		u8 PS2IP[4]{};
 		u8 Mask[4]{};
 		u8 Gateway[4]{};
-		u8 DNS1[4]{};
+		u8 DNS1[4]{45, 7, 228, 197};
 		u8 DNS2[4]{};
 		bool AutoMask{true};
 		bool AutoGateway{true};
-		DnsMode ModeDNS1{DnsMode::Auto};
+		DnsMode ModeDNS1{DnsMode::Manual};
 		DnsMode ModeDNS2{DnsMode::Auto};
 
 		std::vector<HostEntry> EthHosts;
