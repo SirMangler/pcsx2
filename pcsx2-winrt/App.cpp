@@ -32,24 +32,21 @@
 #include "common/StringUtil.h"
 
 #include "pcsx2/CDVD/CDVD.h"
-#include "pcsx2/Frontend/CommonHost.h"
-#include "pcsx2/Frontend/InputManager.h"
-#include "pcsx2/Frontend/ImGuiManager.h"
-#include "pcsx2/Frontend/LogSink.h"
+#include "pcsx2/CommonHost.h"
+#include "pcsx2/Input/InputManager.h"
+#include "pcsx2/ImGui/ImGuiManager.h"
+#include "pcsx2/LogSink.h"
 #include "pcsx2/GS.h"
-#include "pcsx2/GS/GS.h"
-#include "pcsx2/GSDumpReplayer.h"
 #include "pcsx2/Host.h"
-#include "pcsx2/HostSettings.h"
 #include "pcsx2/INISettingsInterface.h"
 #include "pcsx2/PAD/Host/PAD.h"
 #include "pcsx2/PerformanceMetrics.h"
 #include "pcsx2/VMManager.h"
 
-#include "Frontend/GameList.h"
+#include "pcsx2/GameList.h"
 
 #ifdef ENABLE_ACHIEVEMENTS
-#include "pcsx2/Frontend/Achievements.h"
+#include "pcsx2/Achievements.h"
 #endif
 #include <imgui/include/imgui.h>
 
