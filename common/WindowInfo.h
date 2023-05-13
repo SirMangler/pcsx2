@@ -23,6 +23,7 @@ struct WindowInfo
 	{
 		Surfaceless,
 		Win32,
+		WinRT,
 		X11,
 		Wayland,
 		MacOS

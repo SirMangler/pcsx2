@@ -314,7 +314,11 @@ void PAD::SetDefaultControllerConfig(SettingsInterface& si)
 
 	// PCSX2 Controller Settings - Controller 1 / Controller 2 / ...
 	// Use the automapper to set this up.
+#ifndef WINRT_XBOX
 	MapController(si, 0, InputManager::GetGenericBindingMapping("Keyboard"));
+#else
+	MapController(si, 0, InputManager::GetGenericBindingMapping("XInput Controller 0"));
+#endif
 }
 
 void PAD::SetDefaultHotkeyConfig(SettingsInterface& si)

@@ -206,6 +206,8 @@ GSRendererType GSUtil::GetPreferredRenderer()
 #if defined(__APPLE__)
 	// Mac: Prefer Metal hardware.
 	return GSRendererType::Metal;
+#elif defined(WINRT_XBOX)
+	return GSRendererType::DX12;
 #elif defined(_WIN32)
 	// Use D3D device info to select renderer.
 	return D3D::GetPreferredRenderer();

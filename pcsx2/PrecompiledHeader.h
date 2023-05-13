@@ -22,6 +22,13 @@
 #	pragma warning(disable:4996) //ignore the stricmp deprecated warning
 #endif
 
+// Seems to be a bug in VS where this isn't properly applied
+#ifdef WINRT_XBOX
+#define NOMINMAX
+#define UNICODE
+#define _UNICODE
+#endif
+
 #include "common/Pcsx2Defs.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -51,6 +51,10 @@
 #include <ShlObj.h>
 #endif
 
+#ifdef WINRT_XBOX
+#include "UWPUtils.h"
+#endif
+
 static constexpr u32 SETTINGS_VERSION = 1;
 
 namespace CommonHost
@@ -150,7 +154,9 @@ void CommonHost::SetDataDirectory()
 		return;
 	}
 
-#if defined(_WIN32)
+#if defined(WINRT_XBOX)
+	EmuFolders::DataRoot = UWP::GetLocalFolder();
+#elif defined(_WIN32)
 	// On Windows, use My Documents\PCSX2 to match old installs.
 	PWSTR documents_directory;
 	if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Documents, 0, NULL, &documents_directory)))

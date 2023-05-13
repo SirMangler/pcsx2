@@ -251,7 +251,7 @@ bool VMManager::Internal::InitializeGlobals()
 	// On Win32, we have a bunch of things which use COM (e.g. SDL, XAudio2, etc).
 	// We need to initialize COM first, before anything else does, because otherwise they might
 	// initialize it in single-threaded/apartment mode, which can't be changed to multithreaded.
-#ifdef _WIN32
+#if _WIN32 && !WINRT_XBOX
 	HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 	if (FAILED(hr))
 	{
@@ -293,7 +293,7 @@ void VMManager::Internal::ReleaseGlobals()
 	SPU2::Shutdown();
 	GSshutdown();
 
-#ifdef _WIN32
+#if _WIN32 && !WINRT_XBOX
 	CoUninitialize();
 #endif
 }

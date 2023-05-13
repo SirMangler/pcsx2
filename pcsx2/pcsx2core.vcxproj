@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props')" />
   <Import Project="$(SolutionDir)common\vsprops\BaseProjectConfig.props" />
   <Import Project="$(SolutionDir)common\vsprops\ProjectConfigAVX2.props" />
   <Import Project="$(SolutionDir)common\vsprops\WinSDK.props" />
@@ -53,14 +54,17 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)3rdparty\rcheevos\rcheevos\include;$(SolutionDir)3rdparty\rainterface</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)3rdparty\discord-rpc\include</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)3rdparty\zydis\include;$(SolutionDir)3rdparty\zydis\dependencies\zycore\include</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)3rdparty\ffmpeg\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)3rdparty\ffmpeg\include;$(SolutionDir)pcsx2-winrt</AdditionalIncludeDirectories>
       <ExceptionHandling>Async</ExceptionHandling>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>PrecompiledHeader.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
       <AdditionalOptions Condition="!$(Configuration.Contains(Clang))">/Zc:externConstexpr %(AdditionalOptions)</AdditionalOptions>
-      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;ZIP_STATIC;LZMA_API_STATIC;BUILD_DX=1;ENABLE_DISCORD_PRESENCE;ENABLE_RAINTEGRATION;ENABLE_ACHIEVEMENTS;ENABLE_OPENGL;ENABLE_VULKAN;SPU2X_CUBEB;SDL_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <!-- TODO Enable only for UWP/WinRT -->
+      <PreprocessorDefinitions>WINRT_XBOX=1</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(WINRT_XBOX)' == '0'">WIN32_LEAN_AND_MEAN;ZIP_STATIC;LZMA_API_STATIC;BUILD_DX=1;ENABLE_DISCORD_PRESENCE;ENABLE_RAINTEGRATION;ENABLE_ACHIEVEMENTS;ENABLE_OPENGL;ENABLE_VULKAN;SPU2X_CUBEB;SDL_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(WINRT_XBOX)' != '0'">WIN32_LEAN_AND_MEAN;ENABLE_ACHIEVEMENTS;ZIP_STATIC;LZMA_API_STATIC;SPU2X_CUBEB;BUILD_DX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="$(Configuration.Contains(Debug))">PCSX2_DEBUG;PCSX2_DEVBUILD;_SECURE_SCL_=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="$(Configuration.Contains(Devel))">PCSX2_DEVEL;PCSX2_DEVBUILD;NDEBUG;_SECURE_SCL_=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="$(Configuration.Contains(Release))">NDEBUG;_SECURE_SCL_=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -101,6 +105,7 @@
     <None Include="..\bin\resources\shaders\dx11\merge.fx" />
     <None Include="..\bin\resources\shaders\dx11\shadeboost.fx" />
     <None Include="..\bin\resources\shaders\dx11\tfx.fx" />
+    <None Include="packages.config" />
     <None Include="Utilities\folderdesc.txt" />
     <None Include="Docs\License.txt" />
     <None Include="ps2\eeHwTraceLog.inl" />
@@ -857,5 +862,14 @@
     <Natvis Include="GS\Renderers\HW\GSTextureCache.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
 </Project>
