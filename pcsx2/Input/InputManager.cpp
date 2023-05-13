@@ -1,5 +1,5 @@
 /*  PCSX2 - PS2 Emulator for PCs
- *  Copyright (C) 2002-2022  PCSX2 Dev Team
+ *  Copyright (C) 2002-2023  PCSX2 Dev Team
  *
  *  PCSX2 is free software: you can redistribute it and/or modify it under the terms
  *  of the GNU Lesser General Public License as published by the Free Software Found-
@@ -14,14 +14,16 @@
  */
 
 #include "PrecompiledHeader.h"
-#include "Frontend/InputManager.h"
-#include "Frontend/InputSource.h"
-#include "Frontend/ImGuiManager.h"
+
+#include "ImGui/ImGuiManager.h"
+#include "Input/InputManager.h"
+#include "Input/InputSource.h"
 #include "PAD/Host/PAD.h"
 #include "USB/USB.h"
+#include "VMManager.h"
+
 #include "common/StringUtil.h"
 #include "common/Timer.h"
-#include "VMManager.h"
 
 #include "fmt/core.h"
 
@@ -1511,13 +1513,13 @@ void InputManager::UpdateInputSourceState(SettingsInterface& si, std::unique_loc
 
 #ifdef _WIN32
 #ifndef WINRT_XBOX
-#include "Frontend/DInputSource.h"
+#include "Input/DInputSource.h"
 #endif
-#include "Frontend/XInputSource.h"
+#include "Input/XInputSource.h"
 #endif
 
 #ifdef SDL_BUILD
-#include "Frontend/SDLInputSource.h"
+#include "Input/SDLInputSource.h"
 #endif
 
 void InputManager::ReloadSources(SettingsInterface& si, std::unique_lock<std::mutex>& settings_lock)
