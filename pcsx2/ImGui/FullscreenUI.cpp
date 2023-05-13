@@ -2711,7 +2711,7 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 #endif
 	MenuHeading("On-Screen Display");
 	DrawIntSpinBoxSetting(bsi, ICON_FA_SEARCH " OSD Scale", "Determines how large the on-screen messages and monitor are.", "EmuCore/GS",
-		"OsdScale", 100, 25, 500, 1, "%d%%");
+		"OsdScale", 100, 25, 500, 25, "%d%%");
 	DrawToggleSetting(bsi, ICON_FA_LIST " Show Messages",
 		"Shows on-screen-display messages when events occur such as save states being created/loaded, screenshots being taken, etc.",
 		"EmuCore/GS", "OsdShowMessages", true);
