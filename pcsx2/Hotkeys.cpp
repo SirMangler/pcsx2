@@ -158,7 +158,7 @@ DEFINE_HOTKEY("OpenLeaderboardsList", "System", "Open Leaderboards List", [](s32
 #endif
 DEFINE_HOTKEY("TogglePause", "System", "Toggle Pause", [](s32 pressed) {
 	if (!pressed && VMManager::HasValidVM())
-		VMManager::SetPaused(VMManager::GetState() != VMState::Paused);
+		Host::RunOnCPUThread([]() { VMManager::SetPaused(VMManager::GetState() != VMState::Paused); });
 })
 DEFINE_HOTKEY("ToggleFullscreen", "System", "Toggle Fullscreen", [](s32 pressed) {
 	if (!pressed)
@@ -245,22 +245,22 @@ DEFINE_HOTKEY("NextSaveStateSlot", "Save States", "Select Next Save Slot", [](s3
 })
 DEFINE_HOTKEY("SaveStateToSlot", "Save States", "Save State To Selected Slot", [](s32 pressed) {
 	if (!pressed && VMManager::HasValidVM())
-		VMManager::SaveStateToSlot(s_current_save_slot);
+		Host::RunOnCPUThread([]() { VMManager::SaveStateToSlot(s_current_save_slot); });
 })
 DEFINE_HOTKEY("LoadStateFromSlot", "Save States", "Load State From Selected Slot", [](s32 pressed) {
 	if (!pressed && VMManager::HasValidVM())
-		HotkeyLoadStateSlot(s_current_save_slot);
+		Host::RunOnCPUThread([]() { HotkeyLoadStateSlot(s_current_save_slot); });
 })
 
 #define DEFINE_HOTKEY_SAVESTATE_X(slotnum) \
 	DEFINE_HOTKEY("SaveStateToSlot" #slotnum, "Save States", "Save State To Slot " #slotnum, [](s32 pressed) { \
 		if (!pressed) \
-			HotkeySaveStateSlot(slotnum); \
+			Host::RunOnCPUThread([]() { HotkeySaveStateSlot(slotnum); }); \
 	})
 #define DEFINE_HOTKEY_LOADSTATE_X(slotnum) \
 	DEFINE_HOTKEY("LoadStateFromSlot" #slotnum, "Save States", "Load State From Slot " #slotnum, [](s32 pressed) { \
 		if (!pressed) \
-			HotkeyLoadStateSlot(slotnum); \
+			Host::RunOnCPUThread([]() { HotkeyLoadStateSlot(slotnum); }); \
 	})
 DEFINE_HOTKEY_SAVESTATE_X(1)
 DEFINE_HOTKEY_LOADSTATE_X(1)
