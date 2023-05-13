@@ -296,7 +296,7 @@ const char* ReportVideoMode()
 const char* ReportInterlaceMode()
 {
 	const u64& smode2 = *(u64*)PS2GS_BASE(GS_SMODE2);
-	return !IsProgressiveVideoMode() ? ((smode2 & 2) ? "Interlaced (Frame)" : "Interlaced (Field)") : "Progressive";
+	return !IsProgressiveVideoMode() ? ((smode2 & 2) ? "i" : "i") : "p";
 }
 
 double GetVerticalFrequency()

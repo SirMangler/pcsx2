@@ -1088,7 +1088,7 @@ void FullscreenUI::DrawLandingWindow()
 
 	if (BeginFullscreenColumnWindow(0.0f, -710.0f, "logo", UIPrimaryDarkColor))
 	{
-		const float image_size = LayoutScale(380.f);
+		const float image_size = LayoutScale(700.f);
 		ImGui::SetCursorPos(
 			ImVec2((ImGui::GetWindowWidth() * 0.5f) - (image_size * 0.5f), (ImGui::GetWindowHeight() * 0.5f) - (image_size * 0.5f)));
 		ImGui::Image(s_app_icon_texture->GetNativeHandle(), ImVec2(image_size, image_size));
@@ -1099,7 +1099,7 @@ void FullscreenUI::DrawLandingWindow()
 	{
 		ResetFocusHere();
 
-		BeginMenuButtons(6, 0.5f);
+		BeginMenuButtons(5, 0.5f);
 
 		if (MenuButton(ICON_FA_LIST " Game List", "Launch a game from images scanned from your game directories."))
 		{
@@ -1115,11 +1115,13 @@ void FullscreenUI::DrawLandingWindow()
 		{
 			DoStartBIOS();
 		}
-
+#ifndef WINRT_XBOX
 		if (MenuButton(ICON_FA_COMPACT_DISC " Start Disc", "Start a game from a disc in your PC's DVD drive."))
 		{
 			DoStartDisc();
 		}
+#endif // !WINRT_XBOX
+		
 
 		if (MenuButton(ICON_FA_SLIDERS_H " Settings", "Change settings for the emulator."))
 			SwitchToSettings();
@@ -1131,18 +1133,21 @@ void FullscreenUI::DrawLandingWindow()
 
 		{
 			ImVec2 fullscreen_pos;
-			if (FloatingButton(ICON_FA_WINDOW_CLOSE, 0.0f, 0.0f, -1.0f, -1.0f, 1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
-				DoRequestExit();
-
-			if (FloatingButton(ICON_FA_EXPAND, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
-				DoToggleFullscreen();
 
 			if (FloatingButton(
-					ICON_FA_QUESTION_CIRCLE, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+					ICON_FA_QUESTION_CIRCLE, 0.0f, 0.0f, -1.0f, -1.0f, 1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				OpenAboutWindow();
 
 			if (FloatingButton(ICON_FA_LIGHTBULB, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				ToggleTheme();
+
+#ifndef WINRT_XBOX
+			if (FloatingButton(ICON_FA_WINDOW_CLOSE, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+				DoRequestExit();
+
+			if (FloatingButton(ICON_FA_EXPAND, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+				DoToggleFullscreen();
+#endif // !WINRT_XBOX
 		}
 
 		EndMenuButtons();
@@ -2658,17 +2663,22 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 
 	MenuHeading("Behaviour");
 
-	DrawToggleSetting(bsi, ICON_FA_MAGIC " Inhibit Screensaver",
-		"Prevents the screen saver from activating and the host from sleeping while emulation is running.", "EmuCore", "InhibitScreensaver",
-		true);
+	
 #ifdef WITH_DISCORD_PRESENCE
 	DrawToggleSetting(bsi, "Enable Discord Presence", "Shows the game you are currently playing as part of your profile on Discord.", "UI",
 		"DiscordPresence", false);
 #endif
 	DrawToggleSetting(bsi, ICON_FA_PAUSE " Pause On Start", "Pauses the emulator when a game is started.", "UI", "StartPaused", false);
+
+#ifndef WINRT_XBOX
+	DrawToggleSetting(bsi, ICON_FA_MAGIC " Inhibit Screensaver",
+		"Prevents the screen saver from activating and the host from sleeping while emulation is running.", "EmuCore", "InhibitScreensaver",
+		true);
 	DrawToggleSetting(bsi, ICON_FA_VIDEO " Pause On Focus Loss",
 		"Pauses the emulator when you minimize the window or switch to another application, and unpauses when you switch back.", "UI",
 		"PauseOnFocusLoss", false);
+#endif
+
 	DrawToggleSetting(bsi, ICON_FA_WINDOW_MAXIMIZE " Pause On Menu",
 		"Pauses the emulator when you open the quick menu, and unpauses when you close it.", "UI", "PauseOnMenu", true);
 	DrawToggleSetting(bsi, ICON_FA_POWER_OFF " Confirm Shutdown",
@@ -2690,6 +2700,7 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 		ImGuiFullscreen::SetTheme(bsi->GetBoolValue("UI", "UseLightFullscreenUITheme", false));
 	}
 
+#ifndef WINRT_XBOX
 	MenuHeading("Game Display");
 	DrawToggleSetting(bsi, ICON_FA_TV " Start Fullscreen", "Automatically switches to fullscreen mode when the program is started.", "UI",
 		"StartFullscreen", false);
@@ -2697,7 +2708,7 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 		"Switches between full screen and windowed when the window is double-clicked.", "UI", "DoubleClickTogglesFullscreen", true);
 	DrawToggleSetting(bsi, ICON_FA_MOUSE_POINTER " Hide Cursor In Fullscreen",
 		"Hides the mouse pointer/cursor when the emulator is in fullscreen mode.", "UI", "HideMouseCursor", false);
-
+#endif
 	MenuHeading("On-Screen Display");
 	DrawIntSpinBoxSetting(bsi, ICON_FA_SEARCH " OSD Scale", "Determines how large the on-screen messages and monitor are.", "EmuCore/GS",
 		"OsdScale", 100, 25, 500, 1, "%d%%");
@@ -3755,7 +3766,7 @@ void FullscreenUI::DrawControllerSettingsPage()
 	DrawToggleSetting(bsi, ICON_FA_COG " SDL Raw Input", "Allow SDL to use raw access to input devices.", "InputSources", "SDLRawInput",
 		false, bsi->GetBoolValue("InputSources", "SDL", true), false);
 #endif
-#ifdef _WIN32
+#if _WIN32 && !WINRT_XBOX
 	DrawToggleSetting(bsi, ICON_FA_COG " Enable XInput Input Source",
 		"The XInput source provides support for XBox 360/XBox One/XBox Series controllers.", "InputSources", "XInput", false, true, false);
 #endif
@@ -5414,9 +5425,9 @@ void FullscreenUI::DrawGameGrid(const ImVec2& heading_size)
 
 	const ImGuiStyle& style = ImGui::GetStyle();
 
-	const float title_spacing = LayoutScale(10.0f);
-	const float item_spacing = LayoutScale(20.0f);
-	const float item_width_with_spacing = std::floor(LayoutScale(LAYOUT_SCREEN_WIDTH / 5.0f));
+	const float title_spacing = LayoutScale(5.0f);
+	const float item_spacing = LayoutScale(10.0f);
+	const float item_width_with_spacing = std::floor(LayoutScale(LAYOUT_SCREEN_WIDTH / 7.5f));
 	const float item_width = item_width_with_spacing - item_spacing;
 	const float image_width = item_width - (style.FramePadding.x * 2.0f);
 	const float image_height = image_width * 1.33f;

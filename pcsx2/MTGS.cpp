@@ -962,7 +962,7 @@ void SysMtgsThread::SwitchRenderer(GSRendererType renderer, bool display_message
 
 	if (display_message)
 	{
-		Host::AddIconOSDMessage("SwitchRenderer", ICON_FA_MAGIC, fmt::format("Switching to {} renderer...",
+		Host::AddIconOSDMessage("SwitchRenderer", ICON_FA_MAGIC, fmt::format("{} Renderer.",
 			Pcsx2Config::GSOptions::GetRendererName(renderer)), Host::OSD_INFO_DURATION);
 	}
 
