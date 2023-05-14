@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\pcsx2\PrecompiledHeader.cpp" />
+    <ClCompile Include="App.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\pcsx2\PrecompiledHeader.h" />
+    <ClInclude Include="UWPUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="resources\cover-placeholder.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\fullscreenui\applications-system.png">
+      <Filter>resources\fullscreenui</Filter>
+    </Image>
+    <Image Include="resources\fullscreenui\media-cdrom.png">
+      <Filter>resources\fullscreenui</Filter>
+    </Image>
+    <Image Include="resources\fullscreenui\placeholder.png">
+      <Filter>resources\fullscreenui</Filter>
+    </Image>
+    <Image Include="resources\icons\AppIconLarge.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\star-0.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\star-1.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\star-2.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\star-3.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\star-4.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\star-5.png">
+      <Filter>resources\icons</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-B.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-C.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-HK.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-J.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-K.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-T.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\NTSC-U.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-A.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-AF.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-AU.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-BE.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-E.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-F.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-FI.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-G.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-GR.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-I.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-IN.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-M.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-NL.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-NO.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-P.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-R.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-S.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-SC.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-SW.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-SWI.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\PAL-UK.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+    <Image Include="resources\icons\flags\Other.png">
+      <Filter>resources\icons\flags</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\fa-solid-900.ttf">
+      <Filter>resources\fonts</Filter>
+    </Font>
+    <Font Include="resources\fonts\RobotoMono-Medium.ttf">
+      <Filter>resources\fonts</Filter>
+    </Font>
+    <Font Include="resources\fonts\Roboto-Regular.ttf">
+      <Filter>resources\fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="pcsx2-winrt_TemporaryKey.pfx" />
+    <None Include="PropertySheet.props" />
+    <None Include="resources\cheats_ni.zip">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\cheats_ws.zip">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\GameIndex.yaml">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\fonts\Roboto-Regular-copyright">
+      <Filter>resources\fonts</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\cas.hlsl">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\convert.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\common\ffx_a.h">
+      <Filter>resources\shaders\common</Filter>
+    </None>
+    <None Include="resources\shaders\common\ffx_cas.h">
+      <Filter>resources\shaders\common</Filter>
+    </None>
+    <None Include="resources\shaders\common\fxaa.fx">
+      <Filter>resources\shaders\common</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\imgui.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\interlace.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\merge.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\present.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\shadeboost.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\shaders\dx11\tfx.fx">
+      <Filter>resources\shaders\dx11</Filter>
+    </None>
+    <None Include="resources\sounds\achievements\lbsubmit.wav">
+      <Filter>resources\sounds\achievements</Filter>
+    </None>
+    <None Include="resources\sounds\achievements\message.wav">
+      <Filter>resources\sounds\achievements</Filter>
+    </None>
+    <None Include="resources\sounds\achievements\unlock.wav">
+      <Filter>resources\sounds\achievements</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\game_controller_db.txt">
+      <Filter>resources</Filter>
+    </Text>
+    <Text Include="resources\sounds\achievements\README.txt">
+      <Filter>resources\sounds\achievements</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{aece1ec0-1b67-45c0-9d35-4bdda5d6a08e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{82fdd02a-1f17-478a-8630-335550d3fdd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\fonts">
+      <UniqueIdentifier>{639c25f3-6261-4b9e-b5f2-f72fd5a32a0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\fullscreenui">
+      <UniqueIdentifier>{c58c17fb-dfdd-477f-94d8-51f3fc11a229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\icons">
+      <UniqueIdentifier>{c3979642-a6e2-4506-9d61-e3b9adae0823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\icons\flags">
+      <UniqueIdentifier>{e60adff2-3149-479c-a698-d5cda66acb12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\shaders">
+      <UniqueIdentifier>{238b31c7-3623-4c7e-ad07-722695ee6229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\shaders\common">
+      <UniqueIdentifier>{743bafdb-b01d-4192-8a11-5a984e177ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\shaders\dx11">
+      <UniqueIdentifier>{fdace3ad-4263-40aa-a04f-0dbddc5a1ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\sounds">
+      <UniqueIdentifier>{d47ea45e-01cb-46d3-acf2-7f900aac6cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\sounds\achievements">
+      <UniqueIdentifier>{71d86f5f-ad43-4cdf-ab6d-4bef1601aca2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
