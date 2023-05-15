@@ -197,7 +197,12 @@ bool Host::ConfirmMessage(const std::string_view& title, const std::string_view&
 
 void Host::OpenURL(const std::string_view& url)
 {
-	// noop
+	winrt::Windows::Foundation::Uri m_uri { winrt::to_hstring(url) };
+	auto asyncOperation = winrt::Windows::System::Launcher::LaunchUriAsync(m_uri);
+	asyncOperation.Completed([](winrt::Windows::Foundation::IAsyncOperation<bool> const& sender,
+								 winrt::Windows::Foundation::AsyncStatus const asyncStatus) {
+		return;
+	});
 }
 
 bool Host::CopyTextToClipboard(const std::string_view& text)
