@@ -543,7 +543,7 @@ struct App : implements<App, IFrameworkViewSource, IFrameworkView>
 		WinRTHost::ProcessEventQueue();
 		if (VMManager::GetState() != VMState::Running)
 		{
-			GameList::Refresh(false, true);
+			GameList::Refresh(false);
 			ImGuiManager::InitializeFullscreenUI();
 
 			GetMTGS().WaitForOpen();
