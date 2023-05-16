@@ -312,7 +312,7 @@ void Host::RunOnCPUThread(std::function<void()> function, bool block /* = false 
 
 void Host::RefreshGameListAsync(bool invalidate_cache)
 {
-	GetMTGS().RunOnGSThread([invalidate_cache]() {
+	s_corewind->Dispatcher().RunAsync(CoreDispatcherPriority::Normal, [invalidate_cache]() {
 		GameList::Refresh(invalidate_cache, false);
 	});
 }
