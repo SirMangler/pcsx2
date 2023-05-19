@@ -2882,9 +2882,24 @@ void FullscreenUI::DrawEmulationSettingsPage()
 	DrawToggleSetting(bsi, "Enable Instant VU1",
 		"Reduces timeslicing between VU1 and EE recompilers, effectively running VU1 at an infinite clock speed.", "EmuCore/Speedhacks",
 		"vu1Instant", true);
+#ifndef WINRT_XBOX
 	DrawToggleSetting(bsi, "Enable Cheats", "Enables loading cheats from pnach files.", "EmuCore", "EnableCheats", false);
+#endif
 	DrawToggleSetting(bsi, "Enable Host Filesystem", "Enables access to files from the host: namespace in the virtual machine.", "EmuCore",
 		"HostFs", false);
+
+#ifdef WINRT_XBOX	
+	MenuHeading("Patches");
+	DrawToggleSetting(bsi, "Enable Cheats", "Enables loading cheats from pnach files.", "EmuCore", "EnableCheats", false);
+	DrawToggleSetting(bsi, "Enable Widescreen Patches", "Enables loading widescreen patches from pnach files.", "EmuCore",
+		"EnableWideScreenPatches", false);
+	DrawToggleSetting(bsi, "Enable No-Interlacing Patches", "Enables loading no-interlacing patches from pnach files.", "EmuCore",
+		"EnableNoInterlacingPatches", false);
+	DrawToggleSetting(bsi, "Enable 60FPS Patches", "Enables loading 60fps patches from pnach files.", "EmuCore",
+		"Enable60FPSPatches", false);
+	DrawToggleSetting(bsi, "Enable DNAS Patches", "Enables loading DNAS patches from pnach files.", "EmuCore",
+		"EnableDNASPatches", false);
+#endif
 
 	if (IsEditingGameSettings(bsi))
 	{
@@ -3115,10 +3130,12 @@ void FullscreenUI::DrawGraphicsSettingsPage()
 		100, 10, 300, "%d%%");
 	DrawIntRectSetting(bsi, "Crop", "Crops the image, while respecting aspect ratio.", "EmuCore/GS", "CropLeft", 0, "CropTop", 0,
 		"CropRight", 0, "CropBottom", 0, 0, 720, 1, "%dpx");
+#ifndef WINRT_XBOX
 	DrawToggleSetting(bsi, "Enable Widescreen Patches", "Enables loading widescreen patches from pnach files.", "EmuCore",
 		"EnableWideScreenPatches", false);
 	DrawToggleSetting(bsi, "Enable No-Interlacing Patches", "Enables loading no-interlacing patches from pnach files.", "EmuCore",
 		"EnableNoInterlacingPatches", false);
+#endif
 	DrawIntListSetting(bsi, "Bilinear Upscaling", "Smooths out the image when upscaling the console to the screen.", "EmuCore/GS",
 		"linear_present_mode", static_cast<int>(GSPostBilinearMode::BilinearSharp), s_bilinear_present_options,
 		std::size(s_bilinear_present_options));

@@ -208,6 +208,12 @@
     <None Include="resources\cheats_ni.zip">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="resources\cheats_60.zip">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\cheats_dnas.zip">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png" />

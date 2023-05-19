@@ -254,6 +254,10 @@ void Host::Internal::UpdateEmuFolders()
 	const std::string old_cheats_directory(EmuFolders::Cheats);
 	const std::string old_cheats_ws_directory(EmuFolders::CheatsWS);
 	const std::string old_cheats_ni_directory(EmuFolders::CheatsNI);
+#ifdef WINRT_XBOX
+	const std::string old_cheats_60_directory(EmuFolders::Cheats60);
+	const std::string old_cheats_dnas_directory(EmuFolders::CheatsDNAS);
+#endif	
 	const std::string old_memcards_directory(EmuFolders::MemoryCards);
 	const std::string old_textures_directory(EmuFolders::Textures);
 	const std::string old_videos_directory(EmuFolders::Videos);
@@ -263,8 +267,14 @@ void Host::Internal::UpdateEmuFolders()
 
 	if (VMManager::HasValidVM())
 	{
+#ifdef WINRT_XBOX
+		if (EmuFolders::Cheats != old_cheats_directory || EmuFolders::CheatsWS != old_cheats_ws_directory ||
+			EmuFolders::CheatsNI != old_cheats_ni_directory || EmuFolders::Cheats60 != old_cheats_60_directory ||
+			EmuFolders::CheatsDNAS != old_cheats_dnas_directory)
+#else
 		if (EmuFolders::Cheats != old_cheats_directory || EmuFolders::CheatsWS != old_cheats_ws_directory ||
 			EmuFolders::CheatsNI != old_cheats_ni_directory)
+#endif
 		{
 			VMManager::ReloadPatches(true, true);
 		}
