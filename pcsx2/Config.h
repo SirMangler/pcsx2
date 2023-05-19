@@ -1241,6 +1241,10 @@ struct Pcsx2Config
 		EnablePINE : 1, // enables inter-process communication
 		EnableWideScreenPatches : 1,
 		EnableNoInterlacingPatches : 1,
+#ifdef WINRT_XBOX
+		Enable60FPSPatches : 1,
+		EnableDNASPatches : 1,
+#endif		
 		// TODO - Vaser - where are these settings exposed in the Qt UI?
 		EnableRecordingTools : 1,
 		EnableGameFixes : 1, // enables automatic game fixes
@@ -1335,6 +1339,10 @@ namespace EmuFolders
 	extern std::string Cheats;
 	extern std::string CheatsWS;
 	extern std::string CheatsNI;
+#ifdef WINRT_XBOX
+	extern std::string Cheats60;
+	extern std::string CheatsDNAS;
+#endif	
 	extern std::string Resources;
 	extern std::string Cache;
 	extern std::string Covers;
