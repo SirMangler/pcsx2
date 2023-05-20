@@ -175,6 +175,12 @@
     <None Include="resources\cheats_ws.zip">
       <Filter>resources</Filter>
     </None>
+    <None Include="resources\cheats_60.zip">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="resources\cheats_dnas.zip">
+      <Filter>resources</Filter>
+    </None>
     <None Include="resources\GameIndex.yaml">
       <Filter>resources</Filter>
     </None>
