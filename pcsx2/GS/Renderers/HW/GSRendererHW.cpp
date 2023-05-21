@@ -4292,6 +4292,7 @@ __ri void GSRendererHW::DrawPrims(GSTextureCache::Target* rt, GSTextureCache::Ta
 				m_conf.require_full_barrier = true;
 				DATE_BARRIER = true;
 			}
+#ifndef WINRT_XBOX
 			else if (features.primitive_id)
 			{
 				GL_PERF("DATE: Accurate with alpha %d-%d", GetAlphaMinMax().min, GetAlphaMinMax().max);
@@ -4309,6 +4310,25 @@ __ri void GSRendererHW::DrawPrims(GSTextureCache::Target* rt, GSTextureCache::Ta
 				GL_PERF("DATE: Fast with alpha %d-%d", GetAlphaMinMax().min, GetAlphaMinMax().max);
 				DATE_one = true;
 			}
+#else
+			else if (GSConfig.AccurateDATE)
+			{
+				GL_PERF("DATE: Accurate with alpha %d-%d", GetAlphaMinMax().min, GetAlphaMinMax().max);
+				if (features.primitive_id)
+				{
+					DATE_PRIMID = true;
+				}
+				else if (features.texture_barrier)
+				{
+					m_conf.require_full_barrier = true;
+					DATE_BARRIER = true;
+				}
+				else if (features.stencil_buffer)
+				{
+					DATE_one = true;
+				}
+			}
+#endif // WINRT_XBOX
 		}
 		else if (!m_conf.colormask.wa && !m_cached_ctx.TEST.ATE)
 		{

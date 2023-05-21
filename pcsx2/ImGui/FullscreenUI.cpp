@@ -3361,6 +3361,15 @@ void FullscreenUI::DrawGraphicsSettingsPage()
 		"EmuCore/GS", "DisableDualSourceBlend", false);
 	DrawToggleSetting(bsi, "Disable Shader Cache", "Prevents the loading and saving of shaders/pipelines to disk.", "EmuCore/GS",
 		"DisableShaderCache", false);
+	DrawToggleSetting(bsi, "Disable Vertex Shader Expand", "Falls back to the CPU for expanding sprites/lines.", "EmuCore/GS",
+		"DisableVertexShaderExpand", false);
+#ifdef WINRT_XBOX
+	if (is_hardware)
+	{
+		DrawToggleSetting(bsi, "Accurate Destination Alpha Test",
+			"Implement a more accurate algorithm to compute GS destination alpha testing.", "EmuCore/GS", "accurate_date", true);
+	}
+#endif // WINRT_XBOX
 
 	EndMenuButtons();
 }
@@ -4133,8 +4142,8 @@ void FullscreenUI::DrawFoldersSettingsPage()
 	DrawFolderSetting(bsi, ICON_FA_TV " Widescreen Cheats Directory", "Folders", "CheatsWS", EmuFolders::CheatsWS);
 	DrawFolderSetting(bsi, ICON_FA_MAGIC " No-Interlace Cheats Directory", "Folders", "CheatsNI", EmuFolders::CheatsNI);
 #ifdef WINRT_XBOX
-	DrawFolderSetting(bsi, ICON_FA_MAGIC " 60fps Cheats Directory", "Folders", "Cheats60", EmuFolders::Cheats60);
-	DrawFolderSetting(bsi, ICON_FA_MICROCHIP " DNAS Cheats Directory", "Folders", "CheatsDNAS", EmuFolders::CheatsDNAS);
+	DrawFolderSetting(bsi, ICON_FA_CLOCK " 60FPS Cheats Directory", "Folders", "Cheats60", EmuFolders::Cheats60);
+	DrawFolderSetting(bsi, ICON_FA_WIFI " DNAS Cheats Directory", "Folders", "CheatsDNAS", EmuFolders::CheatsDNAS);
 #endif
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Texture Replacements Directory", "Folders", "Textures", EmuFolders::Textures);
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Video Dumping Directory", "Folders", "Videos", EmuFolders::Videos);
