@@ -101,6 +101,8 @@ CMakeSettings.json
 /out/
 /pcsx2-winrt/resources/cheats_ws.zip
 /pcsx2-winrt/resources/cheats_ni.zip
+/pcsx2-winrt/resources/cheats_60.zip
+/pcsx2-winrt/resources/cheats_dnas.zip
 /bin
 /AppPackages/pcsx2-winrt
 /packages

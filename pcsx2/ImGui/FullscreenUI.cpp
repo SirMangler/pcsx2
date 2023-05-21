@@ -4132,6 +4132,10 @@ void FullscreenUI::DrawFoldersSettingsPage()
 	DrawFolderSetting(bsi, ICON_FA_FROWN " Cheats Directory", "Folders", "Cheats", EmuFolders::Cheats);
 	DrawFolderSetting(bsi, ICON_FA_TV " Widescreen Cheats Directory", "Folders", "CheatsWS", EmuFolders::CheatsWS);
 	DrawFolderSetting(bsi, ICON_FA_MAGIC " No-Interlace Cheats Directory", "Folders", "CheatsNI", EmuFolders::CheatsNI);
+#ifdef WINRT_XBOX
+	DrawFolderSetting(bsi, ICON_FA_MAGIC " 60fps Cheats Directory", "Folders", "Cheats60", EmuFolders::Cheats60);
+	DrawFolderSetting(bsi, ICON_FA_MICROCHIP " DNAS Cheats Directory", "Folders", "CheatsDNAS", EmuFolders::CheatsDNAS);
+#endif
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Texture Replacements Directory", "Folders", "Textures", EmuFolders::Textures);
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Video Dumping Directory", "Folders", "Videos", EmuFolders::Videos);
 
