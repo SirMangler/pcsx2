@@ -437,9 +437,6 @@ Pcsx2Config::GSOptions::GSOptions()
 	HWDownloadMode = GSHardwareDownloadMode::Enabled;
 	HWSpinGPUForReadbacks = false;
 	HWSpinCPUForReadbacks = false;
-#ifdef WINRT_XBOX
-	AccurateDATE = true;
-#endif // WINRT_XBOX
 	GPUPaletteConversion = false;
 	AutoFlushSW = true;
 	PreloadFrameWithGSData = false;
@@ -660,9 +657,6 @@ void Pcsx2Config::GSOptions::LoadSave(SettingsWrapper& wrap)
 
 	GSSettingBool(HWSpinGPUForReadbacks);
 	GSSettingBool(HWSpinCPUForReadbacks);
-#ifdef WINRT_XBOX
-	GSSettingBoolEx(AccurateDATE, "accurate_date");
-#endif // WINRT_XBOX
 	GSSettingBoolEx(GPUPaletteConversion, "paltex");
 	GSSettingBoolEx(AutoFlushSW, "autoflush_sw");
 	GSSettingBoolEx(PreloadFrameWithGSData, "preload_frame_with_gs_data");

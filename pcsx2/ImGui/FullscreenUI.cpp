@@ -3363,13 +3363,6 @@ void FullscreenUI::DrawGraphicsSettingsPage()
 		"DisableShaderCache", false);
 	DrawToggleSetting(bsi, "Disable Vertex Shader Expand", "Falls back to the CPU for expanding sprites/lines.", "EmuCore/GS",
 		"DisableVertexShaderExpand", false);
-#ifdef WINRT_XBOX
-	if (is_hardware)
-	{
-		DrawToggleSetting(bsi, "Accurate Destination Alpha Test",
-			"Implement a more accurate algorithm to compute GS destination alpha testing.", "EmuCore/GS", "accurate_date", true);
-	}
-#endif // WINRT_XBOX
 
 	EndMenuButtons();
 }

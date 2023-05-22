@@ -665,9 +665,6 @@ struct Pcsx2Config
 				bool
 					HWSpinGPUForReadbacks : 1,
 					HWSpinCPUForReadbacks : 1,
-#ifdef WINRT_XBOX
-					AccurateDATE : 1,
-#endif // WINRT_XBOX
 					GPUPaletteConversion : 1,
 					AutoFlushSW : 1,
 					PreloadFrameWithGSData : 1,
