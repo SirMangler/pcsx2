@@ -1138,10 +1138,11 @@ void FullscreenUI::DrawLandingWindow()
 					ICON_FA_QUESTION_CIRCLE, 0.0f, 0.0f, -1.0f, -1.0f, 1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				OpenAboutWindow();
 
+#ifndef WINRT_XBOX
 			if (FloatingButton(ICON_FA_LIGHTBULB, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				ToggleTheme();
 
-#ifndef WINRT_XBOX
+
 			if (FloatingButton(ICON_FA_WINDOW_CLOSE, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				DoRequestExit();
 
@@ -2711,7 +2712,7 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 #endif
 	MenuHeading("On-Screen Display");
 	DrawIntSpinBoxSetting(bsi, ICON_FA_SEARCH " OSD Scale", "Determines how large the on-screen messages and monitor are.", "EmuCore/GS",
-		"OsdScale", 100, 25, 500, 25, "%d%%");
+		"OsdScale", 200, 100, 500, 25, "%d%%");
 	DrawToggleSetting(bsi, ICON_FA_LIST " Show Messages",
 		"Shows on-screen-display messages when events occur such as save states being created/loaded, screenshots being taken, etc.",
 		"EmuCore/GS", "OsdShowMessages", true);
@@ -3384,7 +3385,7 @@ void FullscreenUI::DrawAudioSettingsPage()
 #ifdef SPU2X_CUBEB
 		"Cubeb (Cross-platform)",
 #endif
-#ifdef _WIN32
+#if _WIN32 && !WINRT_XBOX
 		"XAudio2",
 #endif
 	};

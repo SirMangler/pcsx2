@@ -4295,7 +4295,13 @@ __ri void GSRendererHW::DrawPrims(GSTextureCache::Target* rt, GSTextureCache::Ta
 			else if (features.primitive_id)
 			{
 				GL_PERF("DATE: Accurate with alpha %d-%d", GetAlphaMinMax().min, GetAlphaMinMax().max);
+#ifdef WINRT_XBOX
+				// Disabling PRIMID fixes the texture issues on Xbox with the Gran Turismo games
+				// many games have been tested and there has been no noticeable performance loss.
+				DATE_PRIMID = false;
+#else
 				DATE_PRIMID = true;
+#endif
 			}
 			else if (features.texture_barrier)
 			{
