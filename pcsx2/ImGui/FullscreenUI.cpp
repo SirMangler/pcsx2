@@ -2882,24 +2882,9 @@ void FullscreenUI::DrawEmulationSettingsPage()
 	DrawToggleSetting(bsi, "Enable Instant VU1",
 		"Reduces timeslicing between VU1 and EE recompilers, effectively running VU1 at an infinite clock speed.", "EmuCore/Speedhacks",
 		"vu1Instant", true);
-#ifndef WINRT_XBOX
 	DrawToggleSetting(bsi, "Enable Cheats", "Enables loading cheats from pnach files.", "EmuCore", "EnableCheats", false);
-#endif
 	DrawToggleSetting(bsi, "Enable Host Filesystem", "Enables access to files from the host: namespace in the virtual machine.", "EmuCore",
 		"HostFs", false);
-
-#ifdef WINRT_XBOX	
-	MenuHeading("Patches");
-	DrawToggleSetting(bsi, "Enable Cheats", "Enables loading cheats from pnach files.", "EmuCore", "EnableCheats", false);
-	DrawToggleSetting(bsi, "Enable Widescreen Patches", "Enables loading widescreen patches from pnach files.", "EmuCore",
-		"EnableWideScreenPatches", false);
-	DrawToggleSetting(bsi, "Enable No-Interlacing Patches", "Enables loading no-interlacing patches from pnach files.", "EmuCore",
-		"EnableNoInterlacingPatches", false);
-	DrawToggleSetting(bsi, "Enable 60FPS Patches", "Enables loading 60fps patches from pnach files.", "EmuCore",
-		"Enable60FPSPatches", false);
-	DrawToggleSetting(bsi, "Enable DNAS Patches", "Enables loading DNAS patches from pnach files.", "EmuCore",
-		"EnableDNASPatches", false);
-#endif
 
 	if (IsEditingGameSettings(bsi))
 	{
@@ -3128,12 +3113,10 @@ void FullscreenUI::DrawGraphicsSettingsPage()
 		100, 10, 300, "%d%%");
 	DrawIntRectSetting(bsi, "Crop", "Crops the image, while respecting aspect ratio.", "EmuCore/GS", "CropLeft", 0, "CropTop", 0,
 		"CropRight", 0, "CropBottom", 0, 0, 720, 1, "%dpx");
-#ifndef WINRT_XBOX
 	DrawToggleSetting(bsi, "Enable Widescreen Patches", "Enables loading widescreen patches from pnach files.", "EmuCore",
 		"EnableWideScreenPatches", false);
 	DrawToggleSetting(bsi, "Enable No-Interlacing Patches", "Enables loading no-interlacing patches from pnach files.", "EmuCore",
 		"EnableNoInterlacingPatches", false);
-#endif
 	DrawIntListSetting(bsi, "Bilinear Upscaling", "Smooths out the image when upscaling the console to the screen.", "EmuCore/GS",
 		"linear_present_mode", static_cast<int>(GSPostBilinearMode::BilinearSharp), s_bilinear_present_options,
 		std::size(s_bilinear_present_options));
@@ -3382,7 +3365,7 @@ void FullscreenUI::DrawAudioSettingsPage()
 #ifdef SPU2X_CUBEB
 		"Cubeb (Cross-platform)",
 #endif
-#if _WIN32 && !WINRT_XBOX
+#ifdef _WIN32
 		"XAudio2",
 #endif
 	};
@@ -3769,6 +3752,7 @@ void FullscreenUI::DrawControllerSettingsPage()
 	if (MenuButton(ICON_FA_SAVE " Save Profile", "Stores the current settings to an input profile."))
 		DoSaveInputProfile();
 
+#ifndef WINRT_XBOX
 	MenuHeading("Input Sources");
 
 #ifdef SDL_BUILD
@@ -3782,9 +3766,10 @@ void FullscreenUI::DrawControllerSettingsPage()
 	DrawToggleSetting(bsi, ICON_FA_COG " SDL Raw Input", "Allow SDL to use raw access to input devices.", "InputSources", "SDLRawInput",
 		false, bsi->GetBoolValue("InputSources", "SDL", true), false);
 #endif
-#if _WIN32 && !WINRT_XBOX
+#ifdef _WIN32
 	DrawToggleSetting(bsi, ICON_FA_COG " Enable XInput Input Source",
 		"The XInput source provides support for XBox 360/XBox One/XBox Series controllers.", "InputSources", "XInput", false, true, false);
+#endif
 #endif
 
 	MenuHeading("Multitap");
@@ -4129,12 +4114,7 @@ void FullscreenUI::DrawFoldersSettingsPage()
 	DrawFolderSetting(bsi, ICON_FA_WRENCH " Game Settings Directory", "Folders", "GameSettings", EmuFolders::GameSettings);
 	DrawFolderSetting(bsi, ICON_FA_GAMEPAD " Input Profile Directory", "Folders", "InputProfiles", EmuFolders::InputProfiles);
 	DrawFolderSetting(bsi, ICON_FA_FROWN " Cheats Directory", "Folders", "Cheats", EmuFolders::Cheats);
-	DrawFolderSetting(bsi, ICON_FA_TV " Widescreen Cheats Directory", "Folders", "CheatsWS", EmuFolders::CheatsWS);
-	DrawFolderSetting(bsi, ICON_FA_MAGIC " No-Interlace Cheats Directory", "Folders", "CheatsNI", EmuFolders::CheatsNI);
-#ifdef WINRT_XBOX
-	DrawFolderSetting(bsi, ICON_FA_CLOCK " 60FPS Cheats Directory", "Folders", "Cheats60", EmuFolders::Cheats60);
-	DrawFolderSetting(bsi, ICON_FA_WIFI " DNAS Cheats Directory", "Folders", "CheatsDNAS", EmuFolders::CheatsDNAS);
-#endif
+	DrawFolderSetting(bsi, ICON_FA_MAGIC " Patches Directory", "Folders", "Patches", EmuFolders::Patches);
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Texture Replacements Directory", "Folders", "Textures", EmuFolders::Textures);
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Video Dumping Directory", "Folders", "Videos", EmuFolders::Videos);
 

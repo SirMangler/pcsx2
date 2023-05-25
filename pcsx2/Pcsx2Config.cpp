@@ -100,12 +100,7 @@ namespace EmuFolders
 	std::string Langs;
 	std::string Logs;
 	std::string Cheats;
-	std::string CheatsWS;
-	std::string CheatsNI;
-#ifdef WINRT_XBOX
-	std::string Cheats60;
-	std::string CheatsDNAS;
-#endif
+	std::string Patches;
 	std::string Resources;
 	std::string Cache;
 	std::string Covers;
@@ -1353,10 +1348,6 @@ void Pcsx2Config::LoadSave(SettingsWrapper& wrap)
 	SettingsWrapBitBool(EnablePINE);
 	SettingsWrapBitBool(EnableWideScreenPatches);
 	SettingsWrapBitBool(EnableNoInterlacingPatches);
-#ifdef WINRT_XBOX
-	SettingsWrapBitBool(Enable60FPSPatches);
-	SettingsWrapBitBool(EnableDNASPatches);
-#endif
 	SettingsWrapBitBool(EnableRecordingTools);
 	SettingsWrapBitBool(EnableGameFixes);
 	SettingsWrapBitBool(SaveStateOnShutdown);
@@ -1621,12 +1612,7 @@ void EmuFolders::SetDefaults(SettingsInterface& si)
 	si.SetStringValue("Folders", "MemoryCards", "memcards");
 	si.SetStringValue("Folders", "Logs", "logs");
 	si.SetStringValue("Folders", "Cheats", "cheats");
-	si.SetStringValue("Folders", "CheatsWS", "cheats_ws");
-	si.SetStringValue("Folders", "CheatsNI", "cheats_ni");
-#ifdef WINRT_XBOX
-	si.SetStringValue("Folders", "Cheats60", "cheats_60");
-	si.SetStringValue("Folders", "CheatsDNAS", "cheats_dnas");
-#endif	
+	si.SetStringValue("Folders", "Patches", "patches");
 	si.SetStringValue("Folders", "Cache", "cache");
 	si.SetStringValue("Folders", "Textures", "textures");
 	si.SetStringValue("Folders", "InputProfiles", "inputprofiles");
@@ -1649,12 +1635,7 @@ void EmuFolders::LoadConfig(SettingsInterface& si)
 	MemoryCards = LoadPathFromSettings(si, DataRoot, "MemoryCards", "memcards");
 	Logs = LoadPathFromSettings(si, DataRoot, "Logs", "logs");
 	Cheats = LoadPathFromSettings(si, DataRoot, "Cheats", "cheats");
-	CheatsWS = LoadPathFromSettings(si, DataRoot, "CheatsWS", "cheats_ws");
-	CheatsNI = LoadPathFromSettings(si, DataRoot, "CheatsNI", "cheats_ni");
-#ifdef WINRT_XBOX
-	Cheats60 = LoadPathFromSettings(si, DataRoot, "Cheats60", "cheats_60");
-	CheatsDNAS = LoadPathFromSettings(si, DataRoot, "CheatsDNAS", "cheats_dnas");
-#endif
+	Patches = LoadPathFromSettings(si, DataRoot, "Patches", "patches");
 	Covers = LoadPathFromSettings(si, DataRoot, "Covers", "covers");
 	GameSettings = LoadPathFromSettings(si, DataRoot, "GameSettings", "gamesettings");
 	Cache = LoadPathFromSettings(si, DataRoot, "Cache", "cache");
@@ -1668,12 +1649,7 @@ void EmuFolders::LoadConfig(SettingsInterface& si)
 	Console.WriteLn("MemoryCards Directory: %s", MemoryCards.c_str());
 	Console.WriteLn("Logs Directory: %s", Logs.c_str());
 	Console.WriteLn("Cheats Directory: %s", Cheats.c_str());
-	Console.WriteLn("CheatsWS Directory: %s", CheatsWS.c_str());
-	Console.WriteLn("CheatsNI Directory: %s", CheatsNI.c_str());
-#ifdef WINRT_XBOX
-	Console.WriteLn("Cheats60 Directory: %s", Cheats60.c_str());
-	Console.WriteLn("CheatsDNAS Directory: %s", CheatsDNAS.c_str());
-#endif	
+	Console.WriteLn("Patches Directory: %s", Patches.c_str());
 	Console.WriteLn("Covers Directory: %s", Covers.c_str());
 	Console.WriteLn("Game Settings Directory: %s", GameSettings.c_str());
 	Console.WriteLn("Cache Directory: %s", Cache.c_str());
@@ -1691,12 +1667,7 @@ bool EmuFolders::EnsureFoldersExist()
 	result = FileSystem::CreateDirectoryPath(MemoryCards.c_str(), false) && result;
 	result = FileSystem::CreateDirectoryPath(Logs.c_str(), false) && result;
 	result = FileSystem::CreateDirectoryPath(Cheats.c_str(), false) && result;
-	result = FileSystem::CreateDirectoryPath(CheatsWS.c_str(), false) && result;
-	result = FileSystem::CreateDirectoryPath(CheatsNI.c_str(), false) && result;
-#ifdef WINRT_XBOX
-	result = FileSystem::CreateDirectoryPath(Cheats60.c_str(), false) && result;
-	result = FileSystem::CreateDirectoryPath(CheatsDNAS.c_str(), false) && result;
-#endif
+	result = FileSystem::CreateDirectoryPath(Patches.c_str(), false) && result;
 	result = FileSystem::CreateDirectoryPath(Covers.c_str(), false) && result;
 	result = FileSystem::CreateDirectoryPath(GameSettings.c_str(), false) && result;
 	result = FileSystem::CreateDirectoryPath(Cache.c_str(), false) && result;
