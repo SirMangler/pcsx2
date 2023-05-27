@@ -4140,6 +4140,7 @@ void FullscreenUI::DrawFoldersSettingsPage()
 #endif
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Texture Replacements Directory", "Folders", "Textures", EmuFolders::Textures);
 	DrawFolderSetting(bsi, ICON_FA_SLIDERS_H "Video Dumping Directory", "Folders", "Videos", EmuFolders::Videos);
+	DrawFolderSetting(bsi, ICON_FA_FILE "Logs Directory", "Folders", "Logs", EmuFolders::Logs);
 
 	EndMenuButtons();
 }
