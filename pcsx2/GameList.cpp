@@ -818,7 +818,7 @@ bool GameList::RescanPath(const std::string& path)
 
 std::string GameList::GetPlayedTimeFile()
 {
-	return Path::Combine(EmuFolders::Settings, "playtime.dat");
+	return Path::Combine(EmuFolders::Logs, "playtime.dat");
 }
 
 bool GameList::ParsePlayedTimeLine(char* line, std::string& serial, PlayedTimeEntry& entry)
