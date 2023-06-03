@@ -99,6 +99,8 @@ oprofile_data/
 CMakeSettings.json
 /ci-artifacts/
 /out/
+
+# WINRT/UWP Files
 /pcsx2-winrt/resources/cheats_ws.zip
 /pcsx2-winrt/resources/cheats_ni.zip
 /pcsx2-winrt/resources/cheats_60.zip
@@ -114,3 +116,7 @@ CMakeSettings.json
 /Search Results.txt
 /findstr_CLI.bat
 /findstr_CLI(1).bat
+
+# GitHub Desktop Stupidity
+PCSX2_qt.sln
+/pcsx2-winrt/pcsx2-winrt.vcxproj.filters
