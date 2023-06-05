@@ -32,6 +32,11 @@
 #include <ShlObj.h>
 #endif
 
+#ifdef WINRT_XBOX
+#include "pcsx2-winrt/UWPUtils.h"
+#endif // WINRT_XBOX
+
+
 const char* SettingInfo::StringDefaultValue() const
 {
 	return default_value ? default_value : "";
@@ -1549,7 +1554,9 @@ void EmuFolders::SetDataDirectory()
 		return;
 	}
 
-#if defined(_WIN32)
+#if defined(WINRT_XBOX)
+	EmuFolders::DataRoot = UWP::GetLocalFolder();
+#elif defined(_WIN32)
 	// On Windows, use My Documents\PCSX2 to match old installs.
 	PWSTR documents_directory;
 	if (SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Documents, 0, NULL, &documents_directory)))

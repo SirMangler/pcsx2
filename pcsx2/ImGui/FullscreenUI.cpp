@@ -1092,6 +1092,14 @@ void FullscreenUI::DrawLandingWindow()
 			ImVec2((ImGui::GetWindowWidth() * 0.5f) - (image_size * 0.5f), (ImGui::GetWindowHeight() * 0.5f) - (image_size * 0.5f)));
 		ImGui::Image(s_app_icon_texture->GetNativeHandle(), ImVec2(image_size, image_size));
 	}
+
+	const char version_txt[] = "v2.0.2";
+	ImGui::PushFont(g_medium_font);
+	ImGui::SetCursorPos(
+		ImVec2(LayoutScale(10.0f), ImGui::GetWindowHeight() - LayoutScale(20.0f)));
+	ImGui::Text(version_txt);
+	ImGui::PopFont();
+	
 	EndFullscreenColumnWindow();
 
 	if (BeginFullscreenColumnWindow(-710.0f, 0.0f, "menu", UIBackgroundColor))
@@ -1153,10 +1161,9 @@ void FullscreenUI::DrawLandingWindow()
 		EndMenuButtons();
 
 		const char warning_txt[] = "XBSX2.0 is an unofficial fork of PCSX2. Please do not contact PCSX2 for any help with Xbox/XBSX2 related issues.";
-		const ImVec2 rev_size(g_medium_font->CalcTextSizeA(g_medium_font->FontSize, FLT_MAX, 0.0f, warning_txt));
 		ImGui::PushFont(g_medium_font);
 		ImGui::SetCursorPos(
-			ImVec2(LayoutScale(10.0f), ImGui::GetWindowHeight() - rev_size.y - LayoutScale(20.0f)));
+			ImVec2(LayoutScale(10.0f), ImGui::GetWindowHeight() - LayoutScale(20.0f)));
 		ImGui::Text(warning_txt);
 		ImGui::PopFont();
 	}
