@@ -99,8 +99,9 @@ oprofile_data/
 CMakeSettings.json
 /ci-artifacts/
 /out/
-/pcsx2-winrt/resources/cheats_ws.zip
-/pcsx2-winrt/resources/cheats_ni.zip
+
+# WINRT/UWP Files
+/pcsx2-winrt/resources/patches.zip
 /bin
 /AppPackages/pcsx2-winrt
 /packages
@@ -108,6 +109,7 @@ CMakeSettings.json
 /pcsx2-winrt/Generated Files/winrt
 /pcsx2-winrt/BundleArtifacts
 /pcsx2-winrt/readme.txt
+/pcsx2-winrt/README.md
 /pcsx2-winrt/pcsx2-winrt_TemporaryKey.pfx
 /Search Results.txt
 /findstr_CLI.bat
