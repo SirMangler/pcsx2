@@ -3372,7 +3372,7 @@ void FullscreenUI::DrawAudioSettingsPage()
 #ifdef SPU2X_CUBEB
 		"Cubeb (Cross-platform)",
 #endif
-#if _WIN32 && !WINRT_XBOX
+#ifdef _WIN32
 		"XAudio2",
 #endif
 	};
