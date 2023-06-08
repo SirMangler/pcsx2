@@ -11,9 +11,9 @@ body:
     attributes:
       label: Description
       description: |
-        A concise description of the feature you want
+        A concise description of the feature you want.
 
-        Include step by step examples of how the feature should work under various circumstances
+        Include step by step examples of how the feature should work under various circumstances.
     validations:
       required: true
   - type: textarea
@@ -25,8 +25,6 @@ body:
         - How will it make things easier for you?
         - How does this feature help your enjoyment of the emulator?
         - What does it provide that isn't being provided currently?
-
-        We are not accepting feature requests related to the libretro core as it's being maintained separately at this time
     validations:
       required: true
   - type: textarea
@@ -34,8 +32,8 @@ body:
     attributes:
       label: Examples
       description: |
-        Provide examples of the feature as implemented by other software
+        Provide examples of the feature as implemented by other software.
 
-        Include screenshots or video if you like to help demonstrate how you'd like this feature to work
+        Include screenshots or video if you like to help demonstrate how you'd like this feature to work.
     validations:
       required: true
