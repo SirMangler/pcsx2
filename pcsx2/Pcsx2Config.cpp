@@ -33,7 +33,7 @@
 #endif
 
 #ifdef WINRT_XBOX
-#include "pcsx2-winrt/UWPUtils.h"
+#include "UWPUtils.h"
 #endif
 
 const char* SettingInfo::StringDefaultValue() const
