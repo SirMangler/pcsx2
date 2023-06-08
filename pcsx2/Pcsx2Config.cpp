@@ -33,7 +33,7 @@
 #endif
 
 #ifdef WINRT_XBOX
-#include "pcsx2-winrt/UWPUtils.h"
+#include "UWPUtils.h"
 #endif
 
 const char* SettingInfo::StringDefaultValue() const
@@ -1352,6 +1352,10 @@ void Pcsx2Config::LoadSave(SettingsWrapper& wrap)
 	SettingsWrapBitBool(EnablePINE);
 	SettingsWrapBitBool(EnableWideScreenPatches);
 	SettingsWrapBitBool(EnableNoInterlacingPatches);
+#ifdef WINRT_XBOX
+	SettingsWrapBitBool(Enable60FPSPatches);
+	SettingsWrapBitBool(EnableDNASPatches);
+#endif
 	SettingsWrapBitBool(EnableRecordingTools);
 	SettingsWrapBitBool(EnableGameFixes);
 	SettingsWrapBitBool(SaveStateOnShutdown);

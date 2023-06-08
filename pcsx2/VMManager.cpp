@@ -1748,6 +1748,10 @@ void VMManager::CheckForPatchConfigChanges(const Pcsx2Config& old_config)
 	if (EmuConfig.EnableCheats == old_config.EnableCheats &&
 		EmuConfig.EnableWideScreenPatches == old_config.EnableWideScreenPatches &&
 		EmuConfig.EnableNoInterlacingPatches == old_config.EnableNoInterlacingPatches &&
+#ifdef WINRT_XBOX
+		EmuConfig.Enable60FPSPatches == old_config.Enable60FPSPatches &&
+		EmuConfig.EnableDNASPatches == old_config.EnableDNASPatches &&
+#endif
 		EmuConfig.EnablePatches == old_config.EnablePatches)
 	{
 		return;

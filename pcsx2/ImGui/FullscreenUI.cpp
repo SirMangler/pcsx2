@@ -3124,6 +3124,12 @@ void FullscreenUI::DrawGraphicsSettingsPage()
 		"EnableWideScreenPatches", false);
 	DrawToggleSetting(bsi, "Enable No-Interlacing Patches", "Enables loading no-interlacing patches from pnach files.", "EmuCore",
 		"EnableNoInterlacingPatches", false);
+#ifdef WINRT_XBOX
+	DrawToggleSetting(bsi, "Enable 60FPS Patches", "Enables loading 60fps patches from pnach files.", "EmuCore",
+		"Enable60FPSPatches", false);
+	DrawToggleSetting(bsi, "Enable DNAS Patches", "Enables loading DNAS patches from pnach files.", "EmuCore",
+		"EnableDNASPatches", false);
+#endif
 	DrawIntListSetting(bsi, "Bilinear Upscaling", "Smooths out the image when upscaling the console to the screen.", "EmuCore/GS",
 		"linear_present_mode", static_cast<int>(GSPostBilinearMode::BilinearSharp), s_bilinear_present_options,
 		std::size(s_bilinear_present_options));
