@@ -66,18 +66,12 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PrecompiledHeader.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>PrecompiledHeader.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
-      <AdditionalOptions Condition="!$(Configuration.Contains(Clang))">/Zc:externConstexpr %(AdditionalOptions)</AdditionalOptions>
       <!-- TODO Enable only for UWP/WinRT -->
       <PreprocessorDefinitions>WINRT_XBOX=1</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(WINRT_XBOX)' == '0'">WIN32_LEAN_AND_MEAN;ZIP_STATIC;LZMA_API_STATIC;BUILD_DX=1;ENABLE_DISCORD_PRESENCE;ENABLE_RAINTEGRATION;ENABLE_ACHIEVEMENTS;ENABLE_OPENGL;ENABLE_VULKAN;SPU2X_CUBEB;SDL_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(WINRT_XBOX)' != '0'">WIN32_LEAN_AND_MEAN;ENABLE_ACHIEVEMENTS;ZIP_STATIC;LZMA_API_STATIC;SPU2X_CUBEB;BUILD_DX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="$(Configuration.Contains(Debug))">PCSX2_DEBUG;PCSX2_DEVBUILD;_SECURE_SCL_=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="$(Configuration.Contains(Devel))">PCSX2_DEVEL;PCSX2_DEVBUILD;NDEBUG;_SECURE_SCL_=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="$(Configuration.Contains(Release))">NDEBUG;_SECURE_SCL_=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <!-- MSVC automatically adds __AVX__ and __AVX2__ appropriately -->
-      <PreprocessorDefinitions>__SSE4_1__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(WINRT_XBOX)' == '0'">ZIP_STATIC;LZMA_API_STATIC;ENABLE_DISCORD_PRESENCE;ENABLE_RAINTEGRATION;ENABLE_ACHIEVEMENTS;ENABLE_OPENGL;ENABLE_VULKAN;SPU2X_CUBEB;SDL_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(WINRT_XBOX)' != '0'">ENABLE_ACHIEVEMENTS;ZIP_STATIC;LZMA_API_STATIC;SPU2X_CUBEB;BUILD_DX=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">ZYCORE_STATIC_DEFINE;ZYDIS_STATIC_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(WINRT_XBOX)' != '0'">%(AdditionalIncludeDirectories);$(SolutionDir)pcsx2-winrt</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -98,7 +92,6 @@
     <None Include="..\bin\resources\shaders\dx11\shadeboost.fx" />
     <None Include="..\bin\resources\shaders\dx11\tfx.fx" />
     <None Include="packages.config" />
-    <None Include="Utilities\folderdesc.txt" />
     <None Include="GS\Renderers\Vulkan\VKEntryPoints.inl" />
     <None Include="Docs\License.txt" />
     <None Include="ps2\eeHwTraceLog.inl" />

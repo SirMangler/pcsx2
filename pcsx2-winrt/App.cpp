@@ -34,24 +34,21 @@
 #include "common/SettingsWrapper.h"
 #include "common/StringUtil.h"
 
+#include "pcsx2/Achievements.h"
 #include "pcsx2/CDVD/CDVD.h"
-#include "pcsx2/ImGui/ImGuiManager.h"
-#include "pcsx2/Input/InputManager.h"
-#include "pcsx2/LogSink.h"
 #include "pcsx2/GS.h"
 #include "pcsx2/GS/GS.h"
 #include "pcsx2/GSDumpReplayer.h"
+#include "pcsx2/GameList.h"
 #include "pcsx2/Host.h"
 #include "pcsx2/INISettingsInterface.h"
+#include "pcsx2/ImGui/ImGuiManager.h"
+#include "pcsx2/Input/InputManager.h"
+#include "pcsx2/LogSink.h"
 #include "pcsx2/PAD/Host/PAD.h"
 #include "pcsx2/PerformanceMetrics.h"
 #include "pcsx2/VMManager.h"
 
-#include "pcsx2/GameList.h"
-
-#ifdef ENABLE_ACHIEVEMENTS
-#include "pcsx2/Achievements.h"
-#endif
 #include "3rdparty/imgui/include/imgui.h"
 
 using namespace winrt;
@@ -80,7 +77,6 @@ namespace WinRTHost
 static std::unique_ptr<INISettingsInterface> s_settings_interface;
 alignas(16) static SysMtgsThread s_mtgs_thread;
 
-const IConsoleWriter* PatchesCon = &Console;
 BEGIN_HOTKEY_LIST(g_host_hotkeys)
 END_HOTKEY_LIST()
 
@@ -250,7 +246,6 @@ void Host::ReleaseRenderWindow()
 
 void Host::BeginPresentFrame()
 {
-	VMManager::Internal::VSyncOnCPUThread;
 }
 
 void Host::RequestResizeHostDisplay(s32 width, s32 height)
