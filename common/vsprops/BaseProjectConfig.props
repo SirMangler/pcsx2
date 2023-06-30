@@ -13,6 +13,14 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug WinRT|x64">
+      <Configuration>Debug WinRT</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release WinRT|x64">
+      <Configuration>Release WinRT</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug Clang|x64">
       <Configuration>Debug Clang</Configuration>
       <Platform>x64</Platform>

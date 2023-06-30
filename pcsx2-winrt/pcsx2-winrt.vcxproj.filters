@@ -36,13 +36,13 @@
     <Image Include="resources\fullscreenui\applications-system.png">
       <Filter>resources\fullscreenui</Filter>
     </Image>
-    <Image Include="resources\fullscreenui\media-cdrom.png">
+    <Image Include="resources\fullscreenui\media-cdromXBSX2.png">
       <Filter>resources\fullscreenui</Filter>
     </Image>
     <Image Include="resources\fullscreenui\placeholder.png">
       <Filter>resources\fullscreenui</Filter>
     </Image>
-    <Image Include="resources\icons\AppIconLarge.png">
+    <Image Include="resources\icons\AppIconLargeXBSX2.png">
       <Filter>resources\icons</Filter>
     </Image>
     <Image Include="resources\icons\star-0.png">

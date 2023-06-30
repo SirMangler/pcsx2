@@ -1087,18 +1087,24 @@ void FullscreenUI::DrawLandingWindow()
 
 	if (BeginFullscreenColumnWindow(0.0f, -710.0f, "logo", UIPrimaryDarkColor))
 	{
+#ifdef WINRT_XBOX
 		const float image_size = LayoutScale(700.f);
+#else
+		const float image_size = LayoutScale(380.f);
+#endif
 		ImGui::SetCursorPos(
 			ImVec2((ImGui::GetWindowWidth() * 0.5f) - (image_size * 0.5f), (ImGui::GetWindowHeight() * 0.5f) - (image_size * 0.5f)));
 		ImGui::Image(s_app_icon_texture->GetNativeHandle(), ImVec2(image_size, image_size));
 	}
 
+#ifdef WINRT_XBOX
 	const char version_txt[] = "v2.0.2";
 	ImGui::PushFont(g_medium_font);
 	ImGui::SetCursorPos(
 		ImVec2(LayoutScale(10.0f), ImGui::GetWindowHeight() - LayoutScale(20.0f)));
 	ImGui::Text(version_txt);
 	ImGui::PopFont();
+#endif
 
 	EndFullscreenColumnWindow();
 
@@ -1106,7 +1112,11 @@ void FullscreenUI::DrawLandingWindow()
 	{
 		ResetFocusHere();
 
+#ifdef WINRT_XBOX
 		BeginMenuButtons(5, 0.5f);
+#else
+		BeginMenuButtons(6, 0.5f);
+#endif
 
 		if (MenuButton(ICON_FA_LIST " Game List", "Launch a game from images scanned from your game directories."))
 		{
@@ -1140,31 +1150,45 @@ void FullscreenUI::DrawLandingWindow()
 
 		{
 			ImVec2 fullscreen_pos;
-
-			if (FloatingButton(
-					ICON_FA_QUESTION_CIRCLE, 0.0f, 0.0f, -1.0f, -1.0f, 1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
-				OpenAboutWindow();
-
 #ifndef WINRT_XBOX
-			if (FloatingButton(ICON_FA_LIGHTBULB, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
-				ToggleTheme();
-
-
-			if (FloatingButton(ICON_FA_WINDOW_CLOSE, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+			if (FloatingButton(ICON_FA_WINDOW_CLOSE, 0.0f, 0.0f, -1.0f, -1.0f, 1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				DoRequestExit();
 
 			if (FloatingButton(ICON_FA_EXPAND, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
 				DoToggleFullscreen();
 #endif
+
+			if (FloatingButton(
+#ifdef WINRT_XBOX
+					ICON_FA_QUESTION_CIRCLE, 0.0f, 0.0f, -1.0f, -1.0f, 1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+#else
+					ICON_FA_QUESTION_CIRCLE, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+#endif
+				OpenAboutWindow();
+
+#ifndef WINRT_XBOX
+			if (FloatingButton(ICON_FA_LIGHTBULB, fullscreen_pos.x, 0.0f, -1.0f, -1.0f, -1.0f, 0.0f, true, g_large_font, &fullscreen_pos))
+				ToggleTheme();
+#endif
 		}
 
 		EndMenuButtons();
 
+#ifdef WINRT_XBOX
 		const char warning_txt[] = "XBSX2.0 is an unofficial fork of PCSX2. Please do not contact PCSX2 for any help with Xbox/XBSX2 related issues.";
+#else
+		const ImVec2 rev_size(g_medium_font->CalcTextSizeA(g_medium_font->FontSize, FLT_MAX, 0.0f, GIT_REV));
+		ImGui::SetCursorPos(
+			ImVec2(ImGui::GetWindowWidth() - rev_size.x - LayoutScale(20.0f), ImGui::GetWindowHeight() - rev_size.y - LayoutScale(20.0f)));
+#endif
 		ImGui::PushFont(g_medium_font);
+#ifdef WINRT_XBOX
 		ImGui::SetCursorPos(
 			ImVec2(LayoutScale(10.0f), ImGui::GetWindowHeight() - LayoutScale(20.0f)));
 		ImGui::Text(warning_txt);
+#else
+		ImGui::Text(GIT_REV);
+#endif
 		ImGui::PopFont();
 	}
 
@@ -2670,22 +2694,21 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 
 	MenuHeading("Behaviour");
 
-	
+#ifndef WINRT_XBOX
+	DrawToggleSetting(bsi, ICON_FA_MAGIC " Inhibit Screensaver",
+		"Prevents the screen saver from activating and the host from sleeping while emulation is running.", "EmuCore", "InhibitScreensaver",
+		true);
 #ifdef WITH_DISCORD_PRESENCE
 	DrawToggleSetting(bsi, "Enable Discord Presence", "Shows the game you are currently playing as part of your profile on Discord.", "UI",
 		"DiscordPresence", false);
 #endif
 	DrawToggleSetting(bsi, ICON_FA_PAUSE " Pause On Start", "Pauses the emulator when a game is started.", "UI", "StartPaused", false);
-
-#ifndef WINRT_XBOX
-	DrawToggleSetting(bsi, ICON_FA_MAGIC " Inhibit Screensaver",
-		"Prevents the screen saver from activating and the host from sleeping while emulation is running.", "EmuCore", "InhibitScreensaver",
-		true);
 	DrawToggleSetting(bsi, ICON_FA_VIDEO " Pause On Focus Loss",
 		"Pauses the emulator when you minimize the window or switch to another application, and unpauses when you switch back.", "UI",
 		"PauseOnFocusLoss", false);
+#else
+	DrawToggleSetting(bsi, ICON_FA_PAUSE " Pause On Start", "Pauses the emulator when a game is started.", "UI", "StartPaused", false);
 #endif
-
 	DrawToggleSetting(bsi, ICON_FA_WINDOW_MAXIMIZE " Pause On Menu",
 		"Pauses the emulator when you open the quick menu, and unpauses when you close it.", "UI", "PauseOnMenu", true);
 	DrawToggleSetting(bsi, ICON_FA_POWER_OFF " Confirm Shutdown",
@@ -2718,7 +2741,11 @@ void FullscreenUI::DrawInterfaceSettingsPage()
 #endif
 	MenuHeading("On-Screen Display");
 	DrawIntSpinBoxSetting(bsi, ICON_FA_SEARCH " OSD Scale", "Determines how large the on-screen messages and monitor are.", "EmuCore/GS",
+#ifdef WINRT_XBOX
 		"OsdScale", 200, 100, 500, 25, "%d%%");
+#else
+		"OsdScale", 100, 25, 500, 1, "%d%%");
+#endif
 	DrawToggleSetting(bsi, ICON_FA_LIST " Show Messages",
 		"Shows on-screen-display messages when events occur such as save states being created/loaded, screenshots being taken, etc.",
 		"EmuCore/GS", "OsdShowMessages", true);
@@ -5432,9 +5459,15 @@ void FullscreenUI::DrawGameGrid(const ImVec2& heading_size)
 
 	const ImGuiStyle& style = ImGui::GetStyle();
 
+#ifdef WINRT_XBOX
 	const float title_spacing = LayoutScale(5.0f);
 	const float item_spacing = LayoutScale(10.0f);
 	const float item_width_with_spacing = std::floor(LayoutScale(LAYOUT_SCREEN_WIDTH / 7.5f));
+#else
+	const float title_spacing = LayoutScale(10.0f);
+	const float item_spacing = LayoutScale(20.0f);
+	const float item_width_with_spacing = std::floor(LayoutScale(LAYOUT_SCREEN_WIDTH / 5.0f));
+#endif
 	const float item_width = item_width_with_spacing - item_spacing;
 	const float image_width = item_width - (style.FramePadding.x * 2.0f);
 	const float image_height = image_width * 1.33f;
@@ -5874,20 +5907,33 @@ void FullscreenUI::OpenAboutWindow()
 
 void FullscreenUI::DrawAboutWindow()
 {
+#ifdef WINRT_XBOX
 	ImGui::SetNextWindowSize(LayoutScale(1000.0f, 535.0f));
+#else
+	ImGui::SetNextWindowSize(LayoutScale(1000.0f, 500.0f));
+#endif
 	ImGui::SetNextWindowPos(ImGui::GetIO().DisplaySize * 0.5f, ImGuiCond_Always, ImVec2(0.5f, 0.5f));
+#ifdef WINRT_XBOX
 	ImGui::OpenPopup("About XBSX2.0");
+#else
+	ImGui::OpenPopup("About PCSX2");
+#endif
 
 	ImGui::PushFont(g_large_font);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, LayoutScale(10.0f));
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, LayoutScale(20.0f, 20.0f));
 
+#ifdef WINRT_XBOX
 	if (ImGui::BeginPopupModal("About XBSX2.0", &s_about_window_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
+#else
+	if (ImGui::BeginPopupModal("About PCSX2", &s_about_window_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize))
+#endif
 	{
+#ifdef WINRT_XBOX
 		ImGui::TextWrapped(
 			"XBSX2.0 is a fork of PCSX2 developed by SirMangler, TRW and Reverie introducing Xbox/UWP support. Please support the original creators.");
 		ImGui::NewLine();
-
+#endif
 		ImGui::TextWrapped(
 			"PCSX2 is a free and open-source PlayStation 2 (PS2) emulator. Its purpose is to emulate the PS2's hardware, using a "
 			"combination of MIPS CPU Interpreters, Recompilers and a Virtual Machine which manages hardware states and PS2 system memory. "
@@ -5905,8 +5951,19 @@ void FullscreenUI::DrawAboutWindow()
 		if (ActiveButton(ICON_FA_PERSON_BOOTH " Discord", false))
 			ExitFullscreenAndOpenURL(PCSX2_DISCORD_URL);
 
+#ifdef WINRT_XBOX
 		if (ActiveButton(ICON_FA_BUG " XBSX2.0 GitHub Repository", false))
 			ExitFullscreenAndOpenURL(PCSX2_GITHUB_URL);
+#else
+		if (ActiveButton(ICON_FA_GLOBE " Website", false))
+			ExitFullscreenAndOpenURL(PCSX2_WEBSITE_URL);
+
+		if (ActiveButton(ICON_FA_PERSON_BOOTH " Support Forums", false))
+			ExitFullscreenAndOpenURL(PCSX2_FORUMS_URL);
+
+		if (ActiveButton(ICON_FA_BUG " GitHub Repository", false))
+			ExitFullscreenAndOpenURL(PCSX2_GITHUB_URL);
+#endif
 
 		if (ActiveButton(ICON_FA_NEWSPAPER " License", false))
 			ExitFullscreenAndOpenURL(PCSX2_LICENSE_URL);

@@ -99,8 +99,9 @@ oprofile_data/
 CMakeSettings.json
 /ci-artifacts/
 /out/
-/pcsx2-winrt/resources/cheats_ws.zip
-/pcsx2-winrt/resources/cheats_ni.zip
+
+# WINRT/UWP Files
+/pcsx2-winrt/resources/patches.zip
 /bin
 /AppPackages/pcsx2-winrt
 /packages

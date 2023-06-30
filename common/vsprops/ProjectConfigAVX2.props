@@ -13,6 +13,14 @@
       <Configuration>Release AVX2</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug WinRT AVX2|x64">
+      <Configuration>Debug WinRT AVX2</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release WinRT AVX2|x64">
+      <Configuration>Release WinRT AVX2</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug Clang AVX2|x64">
       <Configuration>Debug Clang AVX2</Configuration>
       <Platform>x64</Platform>

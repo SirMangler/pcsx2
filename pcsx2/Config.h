@@ -716,7 +716,11 @@ struct Pcsx2Config
 		bool SynchronousMTGS = false;
 		bool FrameLimitEnable = true;
 
+#ifdef WINRT_XBOX
 		VsyncMode VsyncEnable = VsyncMode::On;
+#else
+		VsyncMode VsyncEnable = VsyncMode::Off;
+#endif
 
 		float LimitScalar = 1.0f;
 		float FramerateNTSC = DEFAULT_FRAME_RATE_NTSC;
@@ -730,10 +734,18 @@ struct Pcsx2Config
 		float StretchY = 100.0f;
 		int Crop[4] = {};
 
+#ifdef WINRT_XBOX
 		float OsdScale = 200.0;
+#else
+		float OsdScale = 100.0;
+#endif
 
 		GSRendererType Renderer = GSRendererType::Auto;
+#ifdef WINRT_XBOX
 		float UpscaleMultiplier = 3.0f;
+#else
+		float UpscaleMultiplier = 1.0f;
+#endif
 
 		HWMipmapLevel HWMipmap = HWMipmapLevel::Automatic;
 		AccBlendLevel AccurateBlendingUnit = AccBlendLevel::Basic;
@@ -949,20 +961,34 @@ struct Pcsx2Config
 			}
 		};
 
+#ifdef WINRT_XBOX
 		bool EthEnable{true};
 		NetApi EthApi{NetApi::Sockets};
 		std::string EthDevice{"Auto"};
+#else
+		bool EthEnable{false};
+		NetApi EthApi{NetApi::Unset};
+		std::string EthDevice;
+#endif
 		bool EthLogDNS{false};
 
 		bool InterceptDHCP{false};
 		u8 PS2IP[4]{};
 		u8 Mask[4]{};
 		u8 Gateway[4]{};
+#ifdef WINRT_XBOX
 		u8 DNS1[4]{45, 7, 228, 197};
+#else
+		u8 DNS1[4]{};
+#endif
 		u8 DNS2[4]{};
 		bool AutoMask{true};
 		bool AutoGateway{true};
+#ifdef WINRT_XBOX
 		DnsMode ModeDNS1{DnsMode::Manual};
+#else
+		DnsMode ModeDNS1{DnsMode::Auto};
+#endif
 		DnsMode ModeDNS2{DnsMode::Auto};
 
 		std::vector<HostEntry> EthHosts;

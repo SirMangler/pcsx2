@@ -962,7 +962,11 @@ void SysMtgsThread::SwitchRenderer(GSRendererType renderer, bool display_message
 
 	if (display_message)
 	{
+#ifdef WINRT_XBOX
 		Host::AddIconOSDMessage("SwitchRenderer", ICON_FA_MAGIC, fmt::format("{} Renderer.",
+#else
+		Host::AddIconOSDMessage("SwitchRenderer", ICON_FA_MAGIC, fmt::format("Switching to {} renderer...",
+#endif
 			Pcsx2Config::GSOptions::GetRendererName(renderer)), Host::OSD_INFO_DURATION);
 	}
 

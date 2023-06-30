@@ -137,31 +137,49 @@ void ImGuiManager::DrawPerformanceOverlay()
 			switch (PerformanceMetrics::GetInternalFPSMethod())
 			{
 				case PerformanceMetrics::InternalFPSMethod::GSPrivilegedRegister:
+#ifdef WINRT_XBOX
 					fmt::format_to(std::back_inserter(text), "{:.2f} FPS", PerformanceMetrics::GetInternalFPS(),
+#else
+					fmt::format_to(std::back_inserter(text), "G: {:.2f} [P] | V: {:.2f}", PerformanceMetrics::GetInternalFPS(),
+#endif
 						PerformanceMetrics::GetFPS());
 					break;
 
 				case PerformanceMetrics::InternalFPSMethod::DISPFBBlit:
+#ifdef WINRT_XBOX
 					fmt::format_to(std::back_inserter(text), "{:.2f} FPS", PerformanceMetrics::GetInternalFPS(),
+#else
+					fmt::format_to(std::back_inserter(text), "G: {:.2f} [B] | V: {:.2f}", PerformanceMetrics::GetInternalFPS(),
+#endif
 						PerformanceMetrics::GetFPS());
 					break;
 
 				case PerformanceMetrics::InternalFPSMethod::None:
 				default:
+#ifdef WINRT_XBOX
 					fmt::format_to(std::back_inserter(text), "{:.2f} FPS", PerformanceMetrics::GetFPS());
+#else
+					fmt::format_to(std::back_inserter(text), "V: {:.2f}", PerformanceMetrics::GetFPS());
+#endif
 					break;
 			}
 			first = false;
 		}
 		if (GSConfig.OsdShowSpeed)
 		{
+#ifdef WINRT_XBOX
 			fmt::format_to(std::back_inserter(text), " ({}%)", static_cast<u32>(std::round(speed)));
+#else
+			fmt::format_to(std::back_inserter(text), "{}{}%", first ? "" : " | ", static_cast<u32>(std::round(speed)));
+#endif
 
+#ifndef WINRT_XBOX
 			// We read the main config here, since MTGS doesn't get updated with speed toggles.
-			/* if (EmuConfig.GS.LimitScalar == 0.0f)
+			if (EmuConfig.GS.LimitScalar == 0.0f)
 				text += " (Max)";
 			else
-				fmt::format_to(std::back_inserter(text), " ({:.0f}%)", EmuConfig.GS.LimitScalar * 100.0f); */
+				fmt::format_to(std::back_inserter(text), " ({:.0f}%)", EmuConfig.GS.LimitScalar * 100.0f);
+#endif
 		}
 		if (!text.empty())
 		{
@@ -194,14 +212,22 @@ void ImGuiManager::DrawPerformanceOverlay()
 			GSgetInternalResolution(&width, &height);
 
 			text.clear();
+#ifdef WINRT_XBOX
 			fmt::format_to(std::back_inserter(text), "{}x{}{} {}", width, height, ReportInterlaceMode(), ReportVideoMode());
+#else
+			fmt::format_to(std::back_inserter(text), "{}x{} {} {}", width, height, ReportVideoMode(), ReportInterlaceMode());
+#endif
 			DRAW_LINE(fixed_font, text.c_str(), IM_COL32(255, 255, 255, 255));
 		}
 
 		if (GSConfig.OsdShowCPU)
 		{
 			text.clear();
+#ifdef WINRT_XBOX
 			fmt::format_to(std::back_inserter(text), "Frame Time: {:.2f}ms", PerformanceMetrics::GetMinimumFrameTime(),
+#else
+			fmt::format_to(std::back_inserter(text), "{:.2f}ms | {:.2f}ms | {:.2f}ms", PerformanceMetrics::GetMinimumFrameTime(),
+#endif
 				PerformanceMetrics::GetAverageFrameTime(), PerformanceMetrics::GetMaximumFrameTime());
 			DRAW_LINE(fixed_font, text.c_str(), IM_COL32(255, 255, 255, 255));
 

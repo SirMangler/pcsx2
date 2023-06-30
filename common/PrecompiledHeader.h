@@ -18,6 +18,3 @@
 #include <csignal>
 #include <cerrno>
 #include <cstdio>
-
-// temporary measure
-#define WINRT_XBOX

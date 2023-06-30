@@ -322,6 +322,7 @@ void PAD::SetDefaultControllerConfig(SettingsInterface& si)
 
 void PAD::SetDefaultHotkeyConfig(SettingsInterface& si)
 {
+#ifdef WINRT_XBOX
 	//XBSX2.0 Controller Mappings
 	si.SetStringValue("Pad1", "Type", "DualShock2");
 	si.SetStringValue("Pad1", "Up", "XInput-0/DPadUp");
@@ -350,6 +351,7 @@ void PAD::SetDefaultHotkeyConfig(SettingsInterface& si)
 	si.SetStringValue("Pad1", "RLeft", "XInput-0/-RightX");
 	si.SetStringValue("Pad1", "SmallMotor", "XInput-0/SmallMotor");
 	si.SetStringValue("Pad1", "LargeMotor", "XInput-0/LargeMotor");
+#endif
 
 	// PCSX2 Controller Settings - Hotkeys
 
@@ -388,7 +390,11 @@ void PAD::SetDefaultHotkeyConfig(SettingsInterface& si)
 	//	si.SetStringValue("Hotkeys", "IncreaseSpeed", "Keyboard"); TBD
 	//  si.SetStringValue("Hotkeys", "ResetVM", "Keyboard"); TBD
 	//  si.SetStringValue("Hotkeys", "ShutdownVM", "Keyboard"); TBD
+#ifdef WINRT_XBOX
 	si.SetStringValue("Hotkeys", "OpenPauseMenu", "XInput-0/Back & XInput-0/Start");
+#else
+	si.SetStringValue("Hotkeys", "OpenPauseMenu", "Keyboard/Escape");
+#endif
 	si.SetStringValue("Hotkeys", "ToggleFrameLimit", "Keyboard/F4");
 	si.SetStringValue("Hotkeys", "TogglePause", "Keyboard/Space");
 	si.SetStringValue("Hotkeys", "ToggleSlowMotion", "Keyboard/Shift & Keyboard/Backtab");

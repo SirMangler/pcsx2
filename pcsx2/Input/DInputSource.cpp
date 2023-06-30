@@ -12,7 +12,6 @@
  *  You should have received a copy of the GNU General Public License along with PCSX2.
  *  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef WINRT_XBOX
 
 #include "PrecompiledHeader.h"
 
@@ -474,5 +473,3 @@ void DInputSource::CheckForStateChanges(size_t index, const DIJOYSTATE2& new_sta
 		}
 	}
 }
-
-#endif

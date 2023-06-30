@@ -627,8 +627,13 @@ bool GSDevice11::CreateSwapChain()
 	m_using_flip_model_swap_chain = !GSConfig.UseBlitSwapChain || m_is_exclusive_fullscreen;
 
 	DXGI_SWAP_CHAIN_DESC1 swap_chain_desc = {};
+#ifdef WINRT_XBOX
 	swap_chain_desc.Width = surface_width;
 	swap_chain_desc.Height = surface_height;
+#else
+	swap_chain_desc.Width = static_cast<u32>(client_rc.right - client_rc.left);
+	swap_chain_desc.Height = static_cast<u32>(client_rc.bottom - client_rc.top);
+#endif
 	swap_chain_desc.Format = swap_chain_format;
 	swap_chain_desc.SampleDesc.Count = 1;
 	swap_chain_desc.BufferCount = 3;
