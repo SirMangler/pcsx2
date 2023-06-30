@@ -1,0 +1,53 @@
+name: 🎮 Windows WinRT Builds
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  # MSBUILD
+  lint_vs_proj_files:
+    name: Lint VS Project Files
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Verify VS Project Files
+        run: .github\workflows\scripts\windows\validate-vs-filters.ps1
+
+  winrt-build:
+    name: Building WinRT
+    needs: lint_vs_proj_files
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+        
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup NuGet.exe for use with actions
+        uses: NuGet/setup-nuget@v1
+        with:
+          nuget-version: latest  
+
+      - name: Build project (AVX2)
+        run: |
+          msbuild PCSX2_winrt.sln /m /p:Platform=x64 /p:Configuration="Release WinRT AVX2" /p:AppxPackageSigningEnabled=true /p:PackageCertificateKeyFile="pcsx2-winrt_TemporaryKey.pfx" /t:restore,build /p:RestorePackagesConfig=true
+
+      - name: Build project (SSE4)
+        run: |
+          msbuild PCSX2_winrt.sln /m /p:Platform=x64 /p:Configuration="Release WinRT" /p:AppxPackageSigningEnabled=true /p:PackageCertificateKeyFile="pcsx2-winrt_TemporaryKey.pfx" /t:restore,build /p:RestorePackagesConfig=true
+
+      - name: Upload Builds
+        uses: actions/upload-artifact@v2
+        with:
+          name: XBSX2.0 Nightly Build
+          path: AppPackages/xbsx2
